@@ -3,9 +3,21 @@
 
 {% block content %}
 
+ <!-- Categorías -->
+
+ <div style="float:left ; width: auto" class="contenedorFormulario">
+    <p style="text-align: center;"></p>
+    {% for categoria in categorias %}
+    <ul>
+        <a href="{% url 'categoria' categoria.id %}" 
+        class="btn" 
+        style="background-color: black; width: 100"
+        >{{categoria.nombre}}</a>;
+    </ul>
+    {% endfor %}
+</div>
 
 <div class="container">
-
     <aside>
         <div class="float-right">
 
@@ -49,7 +61,9 @@
 
         {% endfor %}
     </div>
-
-
+</div>
+<br>
+<div>
+    {% include 'tienda/paginador.html' %}
 </div>
 {% endblock %}
