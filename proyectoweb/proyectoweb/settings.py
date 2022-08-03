@@ -45,10 +45,9 @@ INSTALLED_APPS = [
     'ProyectoWebApp.apps.ProyectowebappConfig',
     'servicios.apps.ServiciosConfig',
     'tienda.apps.TiendaConfig',
-    #'carro.apps.CarroConfig',
-    'carro',
-    #'autenticacion.apps.AutenticacionConfig',
-    'autenticacion',
+    'carro.apps.CarroConfig',
+    'autenticacion.apps.AutenticacionConfig',
+    #'autenticacion',
     'pedidos.apps.PedidosConfig',
     'crispy_forms',
 ]

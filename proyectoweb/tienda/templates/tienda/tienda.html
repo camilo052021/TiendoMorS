@@ -10,12 +10,18 @@
         <div class="float-right">
 
             {% if request.user.is_authenticated %}
-
-                {% include "carro/widget.html" %}
+            <div style="float:right ; width: auto; margin: 10;" class="contenedorFormulario">
+                <p >Ir al Carro</p>
+                <a href="{% url 'carro:carro' %}">
+                    <img src="{% static 'ProyectoWebApp/img/carrito.jpg' %}" class="card-img-top" width="80"
+                        height="80"  margin: 10;">
+                </a>
+                <p>Valor: $ {{importe_total_carro}}</p>
+            </div>
             {% else %}
 
-            <div class="alert alert-danger text-center">Debes Loguearte Para Ver el Carro</div>
-                
+            <div class="alert alert-danger text-center">Login</div>
+
             {% endif %}
 
         </div>
