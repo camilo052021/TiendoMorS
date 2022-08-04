@@ -29,9 +29,11 @@
     <strong>
       Categorias:
 
-      {% for categoria in categorias %}
-        <a href="{% url 'categoria' categoria.id %}" class="linksCategorias">{{categoria.nombre}}</a>&nbsp;&nbsp;&nbsp;
-      {% endfor %}
+        {% for categoria in categorias%}
+
+       <a href="{% url 'blog:categoria' categoria.id %}" class="linksCategorias">{{categoria.nombre}} </a>&nbsp;&nbsp;&nbsp;
+
+        {% endfor %}
 
     </strong>
   </div>

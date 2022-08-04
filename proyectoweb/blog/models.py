@@ -16,7 +16,7 @@ class Categoria(models.Model):
        return self.nombre
 
 class Post(models.Model):
-    categoria = models.ManyToManyField(Categoria)
+    categorias = models.ManyToManyField(Categoria)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=50)
     contenido = models.CharField(max_length=100)

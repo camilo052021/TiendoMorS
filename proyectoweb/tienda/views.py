@@ -11,7 +11,7 @@ def tienda(request):
     paginador = Paginator(productos, 6)
     page_number = request.GET.get('page')
     page_obj = paginador.get_page(page_number)
-    context  ={'productos': productos, 'categorias': categorias}
+    context  ={'productos': productos, 'categorias': categorias,'productos':page_obj}
     return render(request, "tienda/tienda.html",context)
 
 def categoria(request, categoria_id):
