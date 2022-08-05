@@ -17,6 +17,8 @@ from django import urls
 from django.contrib import admin
 from django.urls import path, include
 
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +29,22 @@ urlpatterns = [
     path('tienda/', include('tienda.urls')),
     path('carro/', include('carro.urls')),
     path('pedidos/', include('pedidos.urls')),
-    path('', include('ProyectoWebApp.urls')),    
+    path('', include('ProyectoWebApp.urls')),
+    #path('accounts/', include('django.contrib.auth.urls')), borrar esta linea
+path('reset_password/', 
+        auth_views.PasswordResetView.as_view(template_name='password/password_reset.html'), 
+        name='reset_password'),
+
+    path('reset_password_sent/', 
+        auth_views.PasswordResetDoneView.as_view(template_name='password/password_reset_done.html'), 
+        name='password_reset_done'),
+
+    path('reset/<uidb64>/<token>/', 
+        auth_views.PasswordResetConfirmView.as_view(template_name='password/password_reset_confirm.html'), 
+        name='password_reset_confirm'),
+
+    path('reset_password_complete/', 
+        auth_views.PasswordResetCompleteView.as_view(template_name='password/password_reset_complete.html'), 
+        name='password_reset_complete'),
+
 ]
