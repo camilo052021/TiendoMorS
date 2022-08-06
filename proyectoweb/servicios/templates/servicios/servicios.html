@@ -3,6 +3,9 @@
 {% load static %}
 {% block content %}
 
+{% if user.is_authenticated %}
+<a href="{% url 'agregar_servicio' %}" class="btn btn-sm btn-success">Agregar Servicio</a>
+{% endif %}
 {% for servicio in servicios %}
 
 <section class="page-section clearfix">
@@ -13,6 +16,10 @@
           <h2 class="section-heading mb-4" >
             <span class="section-heading-lower">{{servicio.titulo}}</span>
             <span class="section-heading-upper">{{servicio.contenido}}</span>
+            {% if user.is_authenticated %}
+            <a href="{% url 'editar_servicio' servicio.id %}" class="btn btn-sm btn-success">Editar Servicio</a>
+            <a href="{% url 'eliminar_servicio' servicio.id %}" class="btn btn-sm btn-danger">Eliminar Servicio</a>
+            {% endif %}
           </h2>      
         </div>
       </div>

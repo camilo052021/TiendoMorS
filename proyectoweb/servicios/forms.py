@@ -6,7 +6,6 @@ class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
         fields = '__all__'
-        #fields = ['titulo','contenido']
 
     widgets = {
         'titulo': forms.TextInput(attrs={'class':'from-control mt2', 'palceholder':'Titulo'}),
