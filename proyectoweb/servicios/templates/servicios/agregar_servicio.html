@@ -1,0 +1,16 @@
+{% extends 'ProyectoWebApp/base.html' %}
+
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="contenedorFormulario">
+    <div class="container" style="width: 700; margin: auto;"></div>
+    <form method="POST" action="{% url 'agregar_servicio' %}" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</div>
+{% endblock %}
