@@ -3,6 +3,13 @@
 {% load static %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
+  {% if user.is_superuser %}
+<a href="{% url 'blog:agregar_post' %}" class="btn btn-sm btn-success">Agregar Post</a>
+{% endif %}
+{% endif %}
+
 {% for post in posts %}
 <section class="page-section clearfix">
   <div class="container">
@@ -17,7 +24,12 @@
         <div style="text-align: left;">
           Autor: {{post.autor}}
         </div>
-
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+        <a href="{% url 'blog:editar_post' post.id %}" class="btn btn-sm btn-success">Editar Post</a>
+        <a href="{% url 'blog:eliminar_post' post.id %}" class="btn btn-sm btn-danger">Eliminar Post</a>
+        {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>

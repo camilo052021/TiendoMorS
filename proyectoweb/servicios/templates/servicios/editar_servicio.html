@@ -2,6 +2,10 @@
 
 {% load static %}
 {% block content %}
+
+{% if request.user.is_authenticated %}
+{% if user.is_superuser %}
+
 {% load crispy_forms_tags %}
 <div class="contenedorFormulario">
     <div class="container" style="width: 700; margin: auto;"></div>
@@ -14,4 +18,8 @@
     </form>
 </div>
 </div>
+
+{% endif %}
+{% endif %}
+
 {% endblock %}
