@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import send_mail
 
+
 # Create your views here.
 @login_required(login_url="/autentication/logear")
 def procesar_pedido(request):
@@ -31,8 +32,8 @@ def procesar_pedido(request):
         emailusuario=request.user.email
     )
 
-
     messages.success(request, "El pedido se procesó correctamente")
+    carro.limpiar_carro()
     return redirect('../tienda')
 
 def enviar_mail(**kwargs):
