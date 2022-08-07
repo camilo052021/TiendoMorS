@@ -14,5 +14,11 @@ urlpatterns =[
     path('editar_categoria_p/<int:id>/', views.editar_categoria_p, name='editar_categoria_p'),
     path('eliminar_categoria_p/<int:id>/', views.eliminar_categoria_p, name='eliminar_categoria_p'),
 
+    ##CRUD PRODUCTOS
+
+    path('agregar_producto/', views.agregar_producto, name='agregar_producto'),
+    path('editar_producto/<int:id>/', views.editar_producto, name='editar_producto'),
+    path('eliminar_producto/<int:id>/', views.eliminar_producto, name='eliminar_producto'),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import CategoriaProd, Producto
 from django.contrib.auth.decorators import login_required
-from . forms import CategoriaProductoForm
+from . forms import CategoriaProductoForm, ProductoForm
 #from carro.context_processor import *
 
 # Create your views here.
@@ -60,4 +60,40 @@ def eliminar_categoria_p(request, id):
     if request.user.is_superuser:
         categoria_prod = get_object_or_404(CategoriaProd, pk=id)
         categoria_prod.delete()
+        return redirect('tienda')
+
+@login_required
+def agregar_producto(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = ProductoForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('tienda')
+        else:
+            form = ProductoForm()
+
+        context = {'form':form}
+        return render(request, 'productos/agregar_producto.html', context)
+
+@login_required
+def editar_producto(request, id):
+    if request.user.is_superuser:
+        producto = get_object_or_404(Producto, pk=id)
+        if request.method == 'POST':
+            form = ProductoForm(request.POST, instance=producto)
+            if form.is_valid():
+                form.save()
+                return redirect('tienda')
+        else:
+            form = ProductoForm(instance=producto)
+        
+        context = {'form':form}
+        return render(request, 'productos/editar_producto.html', context)
+
+@login_required
+def eliminar_producto(request, id):
+    if request.user.is_superuser:
+        producto = get_object_or_404(Producto, pk=id)
+        producto.delete()
         return redirect('tienda')

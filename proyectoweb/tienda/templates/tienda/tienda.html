@@ -55,6 +55,10 @@
                 <div class="card-footer text-center">
                     <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar al carro</a>
                 </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'editar_producto' producto.id %}" class="btn btn-info">Editar</a>
+                    <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger">Eliminar</a>
+                </div>
             </div>
             <!---card que se cierra-->
         </div>
