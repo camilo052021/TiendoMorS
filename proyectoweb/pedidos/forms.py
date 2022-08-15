@@ -6,5 +6,5 @@ from django.db.models import fields
 
 class LineaPedidoForm(forms.ModelForm):
     class Meta:
-        model: LineaPedido
+        model = LineaPedido
         fields = '__all__'

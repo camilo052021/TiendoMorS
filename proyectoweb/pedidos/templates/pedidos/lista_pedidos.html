@@ -5,7 +5,7 @@
 
 {% if user.is_authenticated %}
 {% if user.is_superuser %}
-<a href="#" class="btn btn-sm btn-success">Agregar Pedido</a>
+<a href="{% url 'agregar_pedido' %}" class="btn btn-sm btn-success">Agregar Pedido</a>
 
 <div class="contenedorFormulario">
   <div class="container">
@@ -39,10 +39,10 @@
           <td>{{ pedido.producto.precio }}</td>
           <td>{{ pedido.created }}</td>
           <td>
-            <a class="btn btn-danger btn-sm" href="#">Eliminar</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
           </td>
           <td>
-            <a class="btn btn-primary btn-sm" href="#">Editar</a>
+            <a class="btn btn-primary btn-sm" href="{% url 'editar_pedido' pedido.id %}">Editar</a>
           </td>
         </tr>
         {% endfor %}

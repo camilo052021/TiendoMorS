@@ -57,22 +57,44 @@ def enviar_mail(**kwargs):
         html_message=mensaje
     )
 
+
+## este cpdogp es para ver en los templates la lista de os pedidos
 def lista_pedidos(request):
     listaPedidos = LineaPedido.objects.all()
     context = {'listaPedidos':listaPedidos}
     return render(request, "pedidos/lista_pedidos.html",context)
 
-
 @login_required
-def agregar_linea_pedido(request):
+def agregar_pedido(request):
     if request.user.is_superuser:
         if request.method == 'POST':
-            form = LineaPedidoForm(request.POST, request.FILES)
+            form = LineaPedidoForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect('tienda')
         else:
             form = LineaPedidoForm()
-
         context = {'form':form}
         return render(request, 'pedidos/agregar_pedido.html', context)
+
+@login_required
+def editar_pedido(request, id):
+    if request.user.is_superuser:
+        pedido = get_object_or_404(LineaPedido, pk=id)
+        if request.method == 'POST':
+            form = LineaPedidoForm(request.POST, instance=pedido)
+            if form.is_valid():
+                form.save()
+                return redirect('lista_pedidos')
+        else:
+            form = LineaPedidoForm(instance=pedido)  
+
+        context = {'form':form}
+        return render(request,'pedidos/editar_pedido.html', context)
+
+@login_required
+def eliminar_pedido(request, id):
+    if request.user.is_superuser:
+        pedido = get_object_or_404(LineaPedido, pk=id)
+        pedido.delete()
+        return redirect('lista_pedidos')

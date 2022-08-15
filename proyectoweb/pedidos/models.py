@@ -12,7 +12,7 @@ class Pedido(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     @property
     def total(self):
@@ -41,4 +41,3 @@ class LineaPedido(models.Model):
         verbose_name = 'Linea Pedido'
         verbose_name_plural = 'Lineas Pedido'
         ordering = ['id']
-        
