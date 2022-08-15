@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from pedidos.models import Pedido, LineaPedido
@@ -6,6 +6,7 @@ from carro.carro import Carro
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import send_mail
+from .forms import LineaPedidoForm
 
 
 # Create your views here.
@@ -56,3 +57,22 @@ def enviar_mail(**kwargs):
         html_message=mensaje
     )
 
+def lista_pedidos(request):
+    listaPedidos = LineaPedido.objects.all()
+    context = {'listaPedidos':listaPedidos}
+    return render(request, "pedidos/lista_pedidos.html",context)
+
+
+@login_required
+def agregar_linea_pedido(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = LineaPedidoForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('tienda')
+        else:
+            form = LineaPedidoForm()
+
+        context = {'form':form}
+        return render(request, 'pedidos/agregar_pedido.html', context)

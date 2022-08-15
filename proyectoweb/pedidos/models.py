@@ -41,3 +41,4 @@ class LineaPedido(models.Model):
         verbose_name = 'Linea Pedido'
         verbose_name_plural = 'Lineas Pedido'
         ordering = ['id']
+        

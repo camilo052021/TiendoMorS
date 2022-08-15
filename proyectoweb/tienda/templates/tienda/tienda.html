@@ -3,30 +3,39 @@
 
 {% block content %}
 
- <!-- Categorías -->
+<div>
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<a href="{% url 'agregar_producto' %}" class="btn btn-sm btn-success">Agregar Producto</a>
+{% endif %}
+{% endif %}
+</div>
 
- <div style="float:left ; width: auto" class="contenedorFormulario">
-    <p style="text-align: center;"></p>
+<!-- Categorías -->
+<div style="float:left ; width: auto" class="contenedorFormulario">
+    <p style="text-align: left;"></p>
+    <a href="{% url 'categorias_producto' %}" class="btn">Categorias</a>
+
     {% for categoria in categorias %}
     <ul>
-        <a href="{% url 'categoria' categoria.id %}" 
-        class="btn" 
-        style="background-color: black; width: 100"
-        >{{categoria.nombre}}</a>;
+        <a href="{% url 'categoria' categoria.id %}" class="btn"
+            style="background-color: black; width: 100">{{categoria.nombre}}</a>;
     </ul>
     {% endfor %}
 </div>
 
+
+<!-- Productos -->
 <div class="container">
     <aside>
         <div class="float-right">
 
             {% if request.user.is_authenticated %}
             <div style="float:right ; width: auto; margin: 10;" class="contenedorFormulario">
-                <p >Ir al Carro</p>
+                <p>Ir al Carro</p>
                 <a href="{% url 'carro:carro' %}">
-                    <img src="{% static 'ProyectoWebApp/img/carrito.jpg' %}" class="card-img-top" width="80"
-                        height="80"  margin: 10;">
+                    <img src="{% static 'ProyectoWebApp/img/carrito.jpg' %}" class="card-img-top" width="80" height="80"
+                        margin: 10;">
                 </a>
                 <p>Valor: $ {{importe_total_carro}}</p>
             </div>
@@ -37,6 +46,7 @@
             {% endif %}
 
         </div>
+
     </aside>
 
     <div class="row">

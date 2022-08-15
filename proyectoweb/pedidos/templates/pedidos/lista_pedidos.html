@@ -1,0 +1,64 @@
+{% extends 'ProyectoWebApp/base.html' %}
+
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<a href="#" class="btn btn-sm btn-success">Agregar Pedido</a>
+
+<div class="contenedorFormulario">
+  <div class="container">
+    <div>
+      <br>
+
+    </div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          
+          <th scope="col">Usuario</th>
+          <th scope="col">Número Pedido</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Opcion1</th>
+          <th scope="col">Opcion2</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for pedido in listaPedidos %}
+        <tr>
+          
+          <td>{{ pedido.user }}</td>
+          <td>{{ pedido.id }}</td>
+          <td>{{ pedido.producto.nombre }}</td>
+          <td>{{ pedido.cantidad }}</td>
+          <td>{{ pedido.producto.precio }}</td>
+          <td>{{ pedido.created }}</td>
+          <td>
+            <a class="btn btn-danger btn-sm" href="#">Eliminar</a>
+          </td>
+          <td>
+            <a class="btn btn-primary btn-sm" href="#">Editar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+{% endif %}
+{% endif %}
+{% for servicio in servicios %}
+
+
+{% endfor %}
+
+{% endblock %}

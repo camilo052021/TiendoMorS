@@ -4,6 +4,12 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<a href="{% url 'agregar_categoria_p' %}" class="btn btn-sm btn-success">Agregar Categoria</a>
+{% endif %}
+{% endif %}
+
 <div class="contenedorFormulario">
     <div class="container">
 
