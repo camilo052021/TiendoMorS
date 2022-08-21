@@ -7,6 +7,10 @@
 {% if user.is_superuser %}
 <a href="{% url 'agregar_pedido' %}" class="btn btn-sm btn-success">Agregar Pedido</a>
 
+
+{% endif %}
+{% endif %}
+
 <div class="contenedorFormulario">
   <div class="container">
     <div>
@@ -16,7 +20,7 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          
+
           <th scope="col">Usuario</th>
           <th scope="col">Número Pedido</th>
           <th scope="col">Producto</th>
@@ -31,7 +35,7 @@
 
         {% for pedido in listaPedidos %}
         <tr>
-          
+
           <td>{{ pedido.user }}</td>
           <td>{{ pedido.id }}</td>
           <td>{{ pedido.producto.nombre }}</td>
@@ -50,15 +54,5 @@
     </table>
   </div>
 </div>
-
-
-
-
-{% endif %}
-{% endif %}
-{% for servicio in servicios %}
-
-
-{% endfor %}
 
 {% endblock %}
