@@ -5,32 +5,11 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import Perfil
-from .forms import PefilForm, UserForm 
+from .forms import PefilForm, PerfilUpdateForm, UserForm, UserUpdateForm 
 from django.contrib.auth.models import User
 
 
 # Create your views here.
-
-# class VRegistro(View):
-
-#     def get(self,request):
-#         form = UserCreationForm()
-#         context = {'form':form}
-#         return render(request, "registro/registro.html", context)
-
-#     def post(self, request):
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             usuario = form.save()
-#             login(request, usuario)
-#             return redirect('home')
-#         else:
-#             for msg in form.error_messages:
-#                 messages.error(request, form.error_messages[msg])
-
-#             context = {'form':form}
-#             return render(request, "registro/registro.html", context)#
-
 
 #### codigo destinado para todo lo que es el registro y logueo
 def registrar(request):
@@ -38,7 +17,8 @@ def registrar(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Registro completo! Ya te puedes loguear!')
+            username = form.cleaned_data['username']
+            messages.success(request, f'Registro completo! {username} Ya te puedes loguear!')
             return redirect('loguear')
     else:
         form = UserForm(request.POST)
@@ -58,7 +38,8 @@ def loguear(request):
             usuario=authenticate(username=nombre_usuario, password=contra)
             if usuario is not None:
                 login(request, usuario)
-                return redirect(f'registrarPerfil/{request.user.id}')
+                #return redirect(f'perfil/{request.user.username}')
+                return redirect('tienda')
             else:
                 messages.error(request, "Usuario no válido")
         else:
@@ -76,6 +57,32 @@ def registrarPerfil(request, username=None):
         user = User.objects.get(username=username)
     else:
         user = current_user
-    context = {'user':user}
+
+    if request.method =='POST':
+        form = PefilForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            form.user = current_user
+            form.save()
+            return redirect('tienda')
+    else:
+        form = PefilForm()
+
+    context = {'user':user,'form': form}
     return render(request, 'registro/perfil.html', context)
+
+def editar_perfil(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = PerfilUpdateForm(request.POST, request.FILES, instance=request.user.perfil)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('tienda')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = PerfilUpdateForm(instance=request.user.perfil)
     
+    context = {'u_form': u_form, 'p_form': p_form}
+    return render(request, 'registro/perfil.html', context)

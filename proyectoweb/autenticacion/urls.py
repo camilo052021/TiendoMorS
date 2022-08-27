@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import registrar, cerrar_sesion, loguear, registrarPerfil
+from .views import registrar, cerrar_sesion, loguear, editar_perfil
 #from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -8,5 +8,5 @@ urlpatterns = [
     path('loguear', loguear, name='loguear'), 
 
     ## registro del perfil
-    path('registrarPerfil', registrarPerfil, name='registrarPerfil'), 
+    path('editar_perfil/', editar_perfil, name='editar_perfil'), 
 ]
