@@ -4,22 +4,25 @@
 {% block content %}
 
 <div>
-{% if user.is_authenticated %}
-{% if user.is_superuser %}
+    {% if user.is_authenticated %}
+    {% if user.is_superuser %}
     <a href="{% url 'agregar_producto' %}" class="btn btn-sm btn-success">Agregar Producto</a>
-{% endif %}
-{% endif %}
+    {% endif %}
+    {% endif %}
 </div>
 
 <!-- Categorías -->
-<div style="float:left ; width: auto" >
-    <p style="text-align: left;"></p>
-    <a href="{% url 'categorias_producto' %}" class="btn">Categorias</a>
 
+<div style="float:left ; width: auto; margin-top: 10;">
+
+    <div style="text-align: right;">
+        <a href="{% url 'categorias_producto' %}" class="btn btn-info">Categorias</a>
+    </div>
+    <br>
     {% for categoria in categorias %}
     <ul>
         <a href="{% url 'categoria' categoria.id %}" class="btn"
-            style="background-color: white; width: 100">{{categoria.nombre}}</a>
+            style="background-color: black; color: gold; width: 100">{{categoria.nombre}}</a>
     </ul>
     {% endfor %}
 </div>
@@ -41,7 +44,7 @@
             </div>
             {% else %}
 
-            <div class="alert alert-danger text-center">Login</div>
+            <div class="alert alert-danger text-center" style="margin-top: 10;">Debes hacer Login</div>
 
             {% endif %}
 
@@ -65,10 +68,15 @@
                 <div class="card-footer text-center">
                     <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar al carro</a>
                 </div>
+
+                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
                 <div class="card-footer text-center">
                     <a href="{% url 'editar_producto' producto.id %}" class="btn btn-info">Editar</a>
                     <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger">Eliminar</a>
                 </div>
+                {% endif %}
+                {% endif %}
             </div>
             <!---card que se cierra-->
         </div>

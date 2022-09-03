@@ -1,1 +1,0 @@
-me encuentro configurando el paginador
