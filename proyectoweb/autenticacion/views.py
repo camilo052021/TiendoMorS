@@ -50,7 +50,7 @@ def loguear(request):
     return render(request, "login/login.html", context)
 
 
-### con este codigo se registra el perfil
+### con este codigo se registra el perfil automáticamente
 def registrarPerfil(request, username=None):
     current_user = request.user
     if username and username != current_user.username:
@@ -71,6 +71,8 @@ def registrarPerfil(request, username=None):
     context = {'user':user,'form': form}
     return render(request, 'registro/perfil.html', context)
 
+
+#destinado par ala edicion del perfil / actualización de infomracion báscia para el pedido
 def editar_perfil(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)

@@ -3,11 +3,9 @@
 {% load static %}
 {% block content %}
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated %}  
 {% if user.is_superuser %}
 <a href="{% url 'agregar_pedido' %}" class="btn btn-sm btn-success">Agregar Pedido</a>
-
-
 {% endif %}
 {% endif %}
 
@@ -34,8 +32,9 @@
       <tbody>
 
         {% for pedido in listaPedidos %}
-        <tr>
 
+        {% if request.user == pedido.user %}  
+        <tr>
           <td>{{ pedido.user }}</td>
           <td>{{ pedido.id }}</td>
           <td>{{ pedido.producto.nombre }}</td>
@@ -49,7 +48,10 @@
             <a class="btn btn-primary btn-sm" href="{% url 'editar_pedido' pedido.id %}">Editar</a>
           </td>
         </tr>
+        {% endif %}
+
         {% endfor %}
+
       </tbody>
     </table>
   </div>

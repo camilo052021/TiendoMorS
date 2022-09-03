@@ -11,10 +11,7 @@
         {% csrf_token %}
 
         {{form|crispy}}
-
-        <a href="{% url 'procesar_pedido' %}" class="btn btn-success">Pedido</a>
-        
-        <input type="submit" value="Submit">
+       <input type="submit" value="Enviar" class="btn btn-success">
     </form>
 </div>
 </div>

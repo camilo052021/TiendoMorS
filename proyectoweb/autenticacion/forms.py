@@ -3,6 +3,8 @@ from . models import Perfil
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+
+# Para la creación del perfil
 class UserForm(UserCreationForm):
     email = forms.EmailField()
     password1: forms.CharField(label='Password', widget=forms.PasswordInput)

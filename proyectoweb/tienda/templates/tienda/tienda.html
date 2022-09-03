@@ -6,20 +6,20 @@
 <div>
 {% if user.is_authenticated %}
 {% if user.is_superuser %}
-<a href="{% url 'agregar_producto' %}" class="btn btn-sm btn-success">Agregar Producto</a>
+    <a href="{% url 'agregar_producto' %}" class="btn btn-sm btn-success">Agregar Producto</a>
 {% endif %}
 {% endif %}
 </div>
 
 <!-- Categorías -->
-<div style="float:left ; width: auto" class="contenedorFormulario">
+<div style="float:left ; width: auto" >
     <p style="text-align: left;"></p>
     <a href="{% url 'categorias_producto' %}" class="btn">Categorias</a>
 
     {% for categoria in categorias %}
     <ul>
         <a href="{% url 'categoria' categoria.id %}" class="btn"
-            style="background-color: black; width: 100">{{categoria.nombre}}</a>;
+            style="background-color: white; width: 100">{{categoria.nombre}}</a>
     </ul>
     {% endfor %}
 </div>
@@ -52,7 +52,7 @@
     <div class="row">
         {% for producto in productos %}
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card" style="width: 100%; margin: 10px 10px 10px 10px;">
                 <img src="{{producto.imagen.url}}" class="card-img-top" width="100" height="200">
 
