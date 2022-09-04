@@ -336,5 +336,10 @@ ul.errorlist{
 
 
 
-
+@media screen and (max-width: 320px) {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
 
